@@ -21,8 +21,8 @@ class StationsMapFragment : Fragment() {
     ): View? {
         stationsMapViewModel =
                 ViewModelProvider(this).get(StationsMapViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_stations_map, container, false)
-        val textView: TextView = root.findViewById(R.id.text_stations_map)
+        val root = inflater.inflate(R.layout.fragment_stations_map_gen, container, false)
+       // val textView: TextView = root.findViewById(R.id.text_stations_map)
         return root
     }
 }
