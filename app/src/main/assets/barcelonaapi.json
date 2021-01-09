@@ -1,7 +1,4 @@
-{
-  "code": 200,
-  "data": {
-    "nearstations": [
+[
       {
         "id": "1",
         "street_name": "Almog\u00e0vers-\u00c0vila",
@@ -2534,7 +2531,4 @@
         "buses": "06 - 19 - 50 - 51 - 55 - N1 - N4",
         "distance": "0.9984370976539599"
       }
-    ],
-    "transport": "bus"
-  }
-}
+    ]
