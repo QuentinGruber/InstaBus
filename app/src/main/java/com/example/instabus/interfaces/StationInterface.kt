@@ -1,7 +1,7 @@
 package com.example.instabus.interfaces
 
 interface StationInterface {
-    val id: String
+    val id: Int
     val street_name: String
     val city: String
     val utm_x: String

@@ -1,6 +1,7 @@
 package com.example.instabus.ui.StationsMap
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +13,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
+
 
 class StationsMapFragment : Fragment() {
-
+    var lastMarkerId = "";
     private val callback = OnMapReadyCallback { googleMap ->
         /**
          * Manipulates the map once available.
@@ -28,9 +33,24 @@ class StationsMapFragment : Fragment() {
          */
         Stations.forEach { station: Station ->
             val stationPostion = LatLng(station.lat, station.lon);
-            googleMap.addMarker(MarkerOptions().position(stationPostion).title(station.street_name));
+            googleMap.addMarker(
+                MarkerOptions()
+                    .position(stationPostion)
+                    .title(station.street_name)
+                    .snippet("Buses : "+station.buses)
+            );
         }
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(41.3985182, 2.1917991), 14.0f))
+        googleMap.setOnMarkerClickListener { marker ->
+            if (lastMarkerId == marker.id) {
+                // load station page here
+                marker.hideInfoWindow()
+            } else {
+                lastMarkerId = marker.id;
+                marker.showInfoWindow()
+            }
+            true
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater,

@@ -2,7 +2,7 @@ package com.example.instabus
 import com.example.instabus.interfaces.StationInterface
 
 
-data class Station (override val id: String,
+data class Station (override val id: Int,
                              override val street_name: String,
                              override val city: String,
                              override val utm_x: String,
