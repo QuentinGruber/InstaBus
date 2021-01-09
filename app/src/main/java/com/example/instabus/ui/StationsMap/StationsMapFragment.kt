@@ -1,15 +1,13 @@
 package com.example.instabus.ui.StationsMap
 
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.instabus.MainActivity.Companion.Stations
 import com.example.instabus.R
 import com.example.instabus.Station
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -30,9 +28,9 @@ class StationsMapFragment : Fragment() {
          */
         Stations.forEach { station: Station ->
             val stationPostion = LatLng(station.lat, station.lon);
-            googleMap.addMarker(MarkerOptions().position(stationPostion).title("Marker in "+ station.street_name));
+            googleMap.addMarker(MarkerOptions().position(stationPostion).title(station.street_name));
         }
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(41.3851335, 2.1852222)))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(41.3985182, 2.1917991), 14.0f))
     }
 
     override fun onCreateView(inflater: LayoutInflater,
