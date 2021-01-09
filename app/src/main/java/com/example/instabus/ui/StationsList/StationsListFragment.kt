@@ -22,7 +22,6 @@ class StationsListFragment : Fragment() {
         stationsListViewModel =
                 ViewModelProvider(this).get(StationsListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_stations_list, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
         return root
     }
 }
