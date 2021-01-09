@@ -13,10 +13,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 
 
 class StationsMapFragment : Fragment() {
@@ -43,7 +40,18 @@ class StationsMapFragment : Fragment() {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(41.3985182, 2.1917991), 14.0f))
         googleMap.setOnMarkerClickListener { marker ->
             if (lastMarkerId == marker.id) {
-                // load station page here
+                // TODO: load station page here
+                marker.hideInfoWindow()
+            } else {
+                lastMarkerId = marker.id;
+                marker.showInfoWindow()
+            }
+            true
+        }
+
+        googleMap.setOnInfoWindowClickListener { marker ->
+            if (lastMarkerId == marker.id) {
+                // TODO: load station page here
                 marker.hideInfoWindow()
             } else {
                 lastMarkerId = marker.id;
