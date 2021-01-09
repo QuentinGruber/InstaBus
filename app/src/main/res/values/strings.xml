@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">InstaBus</string>
-    <string name="title_list">List</string>
-    <string name="title_map">Map</string>
+    <string name="list_title">List</string>
+    <string name="map_title">Map</string>
+    <string name="list_desc">"Liste des stations barcelona"</string>
+    <string name="map_desc">Map des stations barcelona</string>
 </resources>
