@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.instabus.stationFragment"
+        android:name="com.example.instabus.StationListGenFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

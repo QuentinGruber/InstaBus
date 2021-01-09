@@ -23,9 +23,6 @@ class StationsMapFragment : Fragment() {
                 ViewModelProvider(this).get(StationsMapViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_stations_map, container, false)
         val textView: TextView = root.findViewById(R.id.text_stations_map)
-        stationsMapViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 }

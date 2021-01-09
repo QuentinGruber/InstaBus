@@ -23,9 +23,6 @@ class StationsListFragment : Fragment() {
                 ViewModelProvider(this).get(StationsListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_stations_list, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        stationsListViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 }
