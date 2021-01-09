@@ -12,9 +12,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
-import com.example.instabus.Station
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        var Stations : List<Station> = listOf();
+    }
 
     private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
         val jsonString: String
@@ -27,22 +29,26 @@ class MainActivity : AppCompatActivity() {
         return jsonString
     }
 
-    private fun GetStations(context: Context){
+    public fun GetStations(): List<Station> {
+        return Stations;
+    }
+
+    private fun GetStationsFromApi(context: Context){
         val jsonFileString = getJsonDataFromAsset(context, "barcelonaapi.json")
         if (jsonFileString != null) {
             Log.i("data", jsonFileString)
         }
 
         val gson = Gson()
-        val listPersonType = object : TypeToken<List<Station>>() {}.type
+        val listStationsType = object : TypeToken<List<Station>>() {}.type
 
-        var people: List<Station> = gson.fromJson(jsonFileString, listPersonType)
-        people.forEachIndexed { idx, person -> Log.i("data", "> Item $idx:\n$person") }
+        Stations = gson.fromJson(jsonFileString, listStationsType)
+        Stations.forEachIndexed { idx, person -> Log.i("data", "> Item $idx:\n$person") }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        GetStations(this@MainActivity)
+        GetStationsFromApi(this@MainActivity)
 
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)

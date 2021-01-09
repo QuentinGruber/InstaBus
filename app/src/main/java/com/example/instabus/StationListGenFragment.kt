@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.instabus.dummy.DummyContent
+import com.example.instabus.MainActivity
+import com.example.instabus.MainActivity.Companion.Stations
 
 /**
  * A fragment representing a list of Items.
@@ -36,7 +38,7 @@ class StationListGenFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MystationRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = MystationRecyclerViewAdapter(Stations)
             }
         }
         return view

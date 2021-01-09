@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.example.instabus.dummy.DummyContent.DummyItem
+import com.example.instabus.Station
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class MystationRecyclerViewAdapter(
-        private val values: List<DummyItem>)
+        private val values: List<Station>)
     : RecyclerView.Adapter<MystationRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,7 +26,7 @@ class MystationRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.contentView.text = item.street_name
     }
 
     override fun getItemCount(): Int = values.size
