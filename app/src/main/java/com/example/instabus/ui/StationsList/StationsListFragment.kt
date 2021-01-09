@@ -1,4 +1,4 @@
-package com.example.instabus.ui.home
+package com.example.instabus.ui.StationsList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.instabus.R
 
-class HomeFragment : Fragment() {
+class StationsListFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var stationsListViewModel: StationsListViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        stationsListViewModel =
+                ViewModelProvider(this).get(StationsListViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_stations_list, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        stationsListViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
