@@ -29,10 +29,6 @@ class MainActivity : AppCompatActivity() {
         return jsonString
     }
 
-    public fun GetStations(): List<Station> {
-        return Stations;
-    }
-
     private fun GetStationsFromApi(context: Context){
         val jsonFileString = getJsonDataFromAsset(context, "barcelonaapi.json")
         if (jsonFileString != null) {
