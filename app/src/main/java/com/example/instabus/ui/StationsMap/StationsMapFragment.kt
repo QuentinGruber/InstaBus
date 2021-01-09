@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.instabus.MainActivity.Companion.Stations
 import com.example.instabus.R
+import com.example.instabus.Station
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -26,9 +28,11 @@ class StationsMapFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        Stations.forEach { station: Station ->
+            val stationPostion = LatLng(station.lat, station.lon);
+            googleMap.addMarker(MarkerOptions().position(stationPostion).title("Marker in "+ station.street_name));
+        }
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(41.3851335, 2.1852222)))
     }
 
     override fun onCreateView(inflater: LayoutInflater,

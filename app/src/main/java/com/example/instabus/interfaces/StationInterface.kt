@@ -6,8 +6,8 @@ interface StationInterface {
     val city: String
     val utm_x: String
     val utm_y: String
-    val lat: String
-    val lon: String
+    val lat: Double
+    val lon: Double
     val furniture: String
     val buses: String
     val distance: String
