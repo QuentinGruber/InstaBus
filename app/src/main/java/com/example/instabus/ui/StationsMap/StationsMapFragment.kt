@@ -1,14 +1,13 @@
 package com.example.instabus.ui.StationsMap
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.instabus.MainActivity.Companion.Stations
 import com.example.instabus.R
-import com.example.instabus.Station
+import com.example.instabus.objects.Station
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment

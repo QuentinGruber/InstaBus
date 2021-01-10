@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.instabus.objects.Station
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException

@@ -1,4 +1,4 @@
-package com.example.instabus
+package com.example.instabus.objects
 import com.example.instabus.interfaces.StationInterface
 
 
