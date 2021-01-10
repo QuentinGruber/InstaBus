@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FetchStationsFromApi();
-
+        //FetchStationsFromApi();
+        Stations = GetStationsFromFile(this@MainActivity);
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
