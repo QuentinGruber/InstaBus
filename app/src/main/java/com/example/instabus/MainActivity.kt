@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.instabus.interfaces.BarcelonaBusApiService
+import com.example.instabus.interfaces.BarcelonaBusResponseApi
 import com.example.instabus.interfaces.StationInterface
 import com.example.instabus.objects.Station
 import com.google.gson.Gson
@@ -44,13 +45,13 @@ class MainActivity : AppCompatActivity() {
                 .build()
         val service = retrofit.create(BarcelonaBusApiService::class.java)
         val ApiRequest = service.listStations()
-        ApiRequest.enqueue(object : Callback<List<StationInterface>> {
-            override fun onResponse(call: Call<List<StationInterface>>, response: Response<List<StationInterface>>) {
+        ApiRequest.enqueue(object : Callback<BarcelonaBusResponseApi> {
+            override fun onResponse(call: Call<BarcelonaBusResponseApi>, response: Response<BarcelonaBusResponseApi>) {
                 val allStations = response.body()
                 Log.d("Stations", allStations.toString())
                 Stations = allStations as List<Station>;
             }
-            override fun onFailure(call: Call<List<StationInterface>>, t: Throwable) {
+            override fun onFailure(call: Call<BarcelonaBusResponseApi>, t: Throwable) {
                 Stations = GetStationsFromFile(this@MainActivity)
                 error("KO")
             }
