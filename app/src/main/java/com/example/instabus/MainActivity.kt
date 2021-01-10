@@ -1,9 +1,9 @@
 package com.example.instabus
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,8 +11,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.instabus.interfaces.BarcelonaBusApiService
 import com.example.instabus.interfaces.BarcelonaBusResponseApi
-import com.example.instabus.interfaces.StationInterface
 import com.example.instabus.objects.Station
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Call
@@ -21,6 +21,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
+
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -46,11 +47,15 @@ class MainActivity : AppCompatActivity() {
         val service = retrofit.create(BarcelonaBusApiService::class.java)
         val ApiRequest = service.listStations()
         ApiRequest.enqueue(object : Callback<BarcelonaBusResponseApi> {
-            override fun onResponse(call: Call<BarcelonaBusResponseApi>, response: Response<BarcelonaBusResponseApi>) {
+            override fun onResponse(
+                call: Call<BarcelonaBusResponseApi>,
+                response: Response<BarcelonaBusResponseApi>
+            ) {
                 val allStations = response.body()
                 Log.d("Stations", allStations.toString())
                 Stations = allStations as List<Station>;
             }
+
             override fun onFailure(call: Call<BarcelonaBusResponseApi>, t: Throwable) {
                 Stations = GetStationsFromFile(this@MainActivity)
                 error("KO")
@@ -68,8 +73,14 @@ class MainActivity : AppCompatActivity() {
         return gson.fromJson(jsonFileString, listStationsType)
     }
 
+    fun DisplayStationPage() {
+        val myIntent = Intent(this@MainActivity, StationPage::class.java)
+        myIntent.putExtra("key", "d") //Optional parameters
+        this@MainActivity.startActivity(myIntent)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DisplayStationPage();
         //FetchStationsFromApi();
         Stations = GetStationsFromFile(this@MainActivity);
         setContentView(R.layout.activity_main)
@@ -78,8 +89,11 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-               R.id.navigation_list, R.id.navigation_map))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_list, R.id.navigation_map
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
