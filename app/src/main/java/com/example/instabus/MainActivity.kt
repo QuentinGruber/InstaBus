@@ -9,9 +9,16 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.instabus.interfaces.BarcelonaBusApiService
+import com.example.instabus.interfaces.StationInterface
 import com.example.instabus.objects.Station
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +37,26 @@ class MainActivity : AppCompatActivity() {
         return jsonString
     }
 
-    private fun GetStationsFromApi(context: Context){
+    private fun FetchStationsFromApi() {
+        val retrofit = Retrofit.Builder()
+                .baseUrl("http://barcelonaapi.marcpous.com/bus/nearstation/latlon/41.3985182/2.1917991/1.json")
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+        val service = retrofit.create(BarcelonaBusApiService::class.java)
+        val ApiRequest = service.listStations()
+        ApiRequest.enqueue(object : Callback<List<StationInterface>> {
+            override fun onResponse(call: Call<List<StationInterface>>, response: Response<List<StationInterface>>) {
+                val allStations = response.body()
+                Log.d("Stations", allStations.toString())
+                Stations = allStations as List<Station>;
+            }
+            override fun onFailure(call: Call<List<StationInterface>>, t: Throwable) {
+                Stations = GetStationsFromFile(this@MainActivity)
+                error("KO")
+            }
+        })
+    }
+    private fun GetStationsFromFile(context: Context): List<Station> {
         val jsonFileString = getJsonDataFromAsset(context, "barcelonaapi.json")
         if (jsonFileString != null) {
             Log.i("data", jsonFileString)
@@ -38,14 +64,12 @@ class MainActivity : AppCompatActivity() {
 
         val gson = Gson()
         val listStationsType = object : TypeToken<List<Station>>() {}.type
-
-        Stations = gson.fromJson(jsonFileString, listStationsType)
-        Stations.forEachIndexed { idx, person -> Log.i("data", "> Item $idx:\n$person") }
+        return gson.fromJson(jsonFileString, listStationsType)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        GetStationsFromApi(this@MainActivity)
+        FetchStationsFromApi();
 
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
