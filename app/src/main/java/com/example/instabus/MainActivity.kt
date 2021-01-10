@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun FetchStationsFromApi() {
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://barcelonaapi.marcpous.com/bus/nearstation/latlon/41.3985182/2.1917991/1.json")
+                .baseUrl("http://barcelonaapi.marcpous.com")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
         val service = retrofit.create(BarcelonaBusApiService::class.java)
