@@ -3,13 +3,13 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 data class BarcelonaBusResponseApi (
-        val code: String ,
+        val code: Int ,
         val data: BarcelonaBusApiResponseData
 )
 
 
 interface BarcelonaBusApiResponseData {
-    val nearstations: Array<StationInterface>
+    val nearstations: List<StationInterface>
     val transport: String
 }
 

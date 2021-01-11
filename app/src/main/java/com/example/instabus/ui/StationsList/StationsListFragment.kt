@@ -12,15 +12,12 @@ import com.example.instabus.R
 
 class StationsListFragment : Fragment() {
 
-    private lateinit var stationsListViewModel: StationsListViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        stationsListViewModel =
-                ViewModelProvider(this).get(StationsListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_stations_list, container, false)
         return root
     }
