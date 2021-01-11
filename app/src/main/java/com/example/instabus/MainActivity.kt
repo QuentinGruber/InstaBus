@@ -19,13 +19,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        var Stations : List<Station> = listOf();
+        var Stations : List<Station> = listOf()
     }
 
     private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
@@ -42,23 +42,24 @@ class MainActivity : AppCompatActivity() {
     private fun FetchStationsFromApi() {
         val retrofit = Retrofit.Builder()
                 .baseUrl("http://barcelonaapi.marcpous.com")
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val service = retrofit.create(BarcelonaBusApiService::class.java)
         val ApiRequest = service.listStations()
         ApiRequest.enqueue(object : Callback<BarcelonaBusResponseApi> {
             override fun onResponse(
-                call: Call<BarcelonaBusResponseApi>,
-                response: Response<BarcelonaBusResponseApi>
+                    call: Call<BarcelonaBusResponseApi>,
+                    response: Response<BarcelonaBusResponseApi>
             ) {
                 val allStations = response.body()
                 Log.d("Stations", allStations.toString())
-                Stations = allStations as List<Station>;
+                if (allStations != null) {
+                    Stations = allStations.data.nearstations as List<Station>
+                }
             }
 
             override fun onFailure(call: Call<BarcelonaBusResponseApi>, t: Throwable) {
                 Stations = GetStationsFromFile(this@MainActivity)
-                error("KO")
             }
         })
     }
@@ -80,9 +81,9 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DisplayStationPage();
-        //FetchStationsFromApi();
-        Stations = GetStationsFromFile(this@MainActivity);
+      //  DisplayStationPage()
+        FetchStationsFromApi()
+        // Stations = GetStationsFromFile(this@MainActivity);
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
@@ -90,9 +91,9 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_list, R.id.navigation_map
-            )
+                setOf(
+                        R.id.navigation_list, R.id.navigation_map
+                )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
