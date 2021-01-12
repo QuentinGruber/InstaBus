@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
       //  DisplayStationPage()
         if(Stations.isNotEmpty()) {
+            setTheme(R.style.Theme_InstaBus);
             setContentView(R.layout.activity_main)
             val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
