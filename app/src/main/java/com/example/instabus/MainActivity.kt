@@ -25,7 +25,7 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        var Stations : List<Station> = listOf()
+        var Stations : List<Station> = mutableListOf()
     }
 
     private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
@@ -37,6 +37,13 @@ class MainActivity : AppCompatActivity() {
             return null
         }
         return jsonString
+    }
+
+    private fun LoadApp() {
+        val myIntent = Intent(this@MainActivity, MainActivity::class.java)
+        myIntent.putExtra("REFRESH",true)
+        this@MainActivity.startActivity(myIntent)
+        finish()
     }
 
     private fun FetchStationsFromApi() {
@@ -55,11 +62,13 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Stations", allStations.toString())
                 if (allStations != null) {
                     Stations = allStations.data.nearstations as List<Station>
+                    LoadApp();
                 }
             }
 
             override fun onFailure(call: Call<BarcelonaBusResponseApi>, t: Throwable) {
-                Stations = GetStationsFromFile(this@MainActivity)
+                Stations = GetStationsFromFile(this@MainActivity);
+                LoadApp();
             }
         })
     }
@@ -82,20 +91,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       //  DisplayStationPage()
-        FetchStationsFromApi()
-        // Stations = GetStationsFromFile(this@MainActivity);
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        if(Stations.isNotEmpty()) {
+            setContentView(R.layout.activity_main)
+            val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-                setOf(
-                        R.id.navigation_list, R.id.navigation_map
-                )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+            val navController = findNavController(R.id.nav_host_fragment)
+            // Passing each menu ID as a set of Ids because each
+            // menu should be considered as top level destinations.
+            val appBarConfiguration = AppBarConfiguration(
+                    setOf(
+                            R.id.navigation_list, R.id.navigation_map
+                    )
+            )
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            navView.setupWithNavController(navController)
+        }
+        else {
+            FetchStationsFromApi()
+            setContentView(R.layout.fragment_splash_screen)
+        }
+
+
     }
 }

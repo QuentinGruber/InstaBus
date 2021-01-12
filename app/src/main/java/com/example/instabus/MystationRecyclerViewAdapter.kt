@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.instabus.interfaces.StationInterface
 import com.example.instabus.objects.Station
 
 class MystationRecyclerViewAdapter(
-        private val values: List<Station>)
+        private val values: List<StationInterface>)
     : RecyclerView.Adapter<MystationRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
