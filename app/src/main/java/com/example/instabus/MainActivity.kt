@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -83,22 +85,19 @@ class MainActivity : AppCompatActivity() {
         return gson.fromJson(jsonFileString, listStationsType)
     }
 
-    fun DisplayStationPage() {
+    fun DisplayStationPage(view:View) {
         val myIntent = Intent(this@MainActivity, StationPage::class.java)
-        myIntent.putExtra("key", "d") //Optional parameters
+        myIntent.putExtra("stationName", "coucou") //Optional parameters
         this@MainActivity.startActivity(myIntent)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      //  DisplayStationPage()
         if(Stations.isNotEmpty()) {
             setTheme(R.style.Theme_InstaBus);
             setContentView(R.layout.activity_main)
             val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
             val navController = findNavController(R.id.nav_host_fragment)
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
             val appBarConfiguration = AppBarConfiguration(
                     setOf(
                             R.id.navigation_list, R.id.navigation_map
@@ -111,7 +110,5 @@ class MainActivity : AppCompatActivity() {
             FetchStationsFromApi()
             setContentView(R.layout.fragment_splash_screen)
         }
-
-
     }
 }
