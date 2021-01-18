@@ -1,14 +1,17 @@
 package com.example.instabus
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.media.tv.TvContract.AUTHORITY
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +23,7 @@ import java.io.File
 
 
 class StationPage : AppCompatActivity() {
-
+    val REQUEST_CODE = 42;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_station_page)
@@ -33,8 +36,6 @@ class StationPage : AppCompatActivity() {
             val t1 = findViewById<View>(R.id.StationName) as TextView
             t1.text = stationName
         }
-
-        val REQUEST_CODE = 42;
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             ActivityCompat.requestPermissions(this, Array<String>(1) { Manifest.permission.CAMERA }, REQUEST_CODE);
            // val f = File(Environment.getExternalStorageDirectory(), "temp.jpg")
@@ -50,6 +51,17 @@ class StationPage : AppCompatActivity() {
             else {
                 startActivityForResult(takePictureintent, REQUEST_CODE)
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK ){
+            val takenImage = data?.extras?.get("data") as Bitmap
+            val imagePlace = findViewById<View>(R.id.imageView2) as ImageView;
+            imagePlace.setImageBitmap(takenImage);
+        }
+        else{
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
