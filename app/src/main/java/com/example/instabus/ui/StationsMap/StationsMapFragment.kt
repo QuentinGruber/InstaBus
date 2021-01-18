@@ -16,16 +16,16 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 
 class StationsMapFragment : Fragment() {
-    var lastMarkerId = "";
+    var lastMarkerId = ""
     private val callback = OnMapReadyCallback { googleMap ->
         Stations.forEach { station: Station ->
-            val stationPostion = LatLng(station.lat, station.lon);
+            val stationPostion = LatLng(station.lat, station.lon)
             googleMap.addMarker(
                 MarkerOptions()
                     .position(stationPostion)
                     .title(station.street_name)
                     .snippet("Buses : "+station.buses)
-            );
+            )
         }
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(41.3985182, 2.1917991), 14.0f))
         googleMap.setOnMarkerClickListener { marker ->
@@ -33,7 +33,7 @@ class StationsMapFragment : Fragment() {
                 // TODO: load station page here
                 marker.hideInfoWindow()
             } else {
-                lastMarkerId = marker.id;
+                lastMarkerId = marker.id
                 marker.showInfoWindow()
             }
             true
@@ -44,7 +44,7 @@ class StationsMapFragment : Fragment() {
                 // TODO: load station page here
                 marker.hideInfoWindow()
             } else {
-                lastMarkerId = marker.id;
+                lastMarkerId = marker.id
                 marker.showInfoWindow()
             }
             true

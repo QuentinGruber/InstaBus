@@ -63,14 +63,14 @@ class MainActivity : AppCompatActivity() {
                 val allStations = response.body()
                 Log.d("Stations", allStations.toString())
                 if (allStations != null) {
-                    Stations = allStations.data.nearstations as List<Station>
-                    LoadApp();
+                    Stations = allStations.data.nearstations
+                    LoadApp()
                 }
             }
 
             override fun onFailure(call: Call<BarcelonaBusResponseApi>, t: Throwable) {
-                Stations = GetStationsFromFile(this@MainActivity);
-                LoadApp();
+                Stations = GetStationsFromFile(this@MainActivity)
+                LoadApp()
             }
         })
     }
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(Stations.isNotEmpty()) {
-            setTheme(R.style.Theme_InstaBus);
+            setTheme(R.style.Theme_InstaBus)
             setContentView(R.layout.activity_main)
             val navView: BottomNavigationView = findViewById(R.id.nav_view)
 

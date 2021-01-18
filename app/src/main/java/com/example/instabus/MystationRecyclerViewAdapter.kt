@@ -21,8 +21,6 @@ class MystationRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        Log.d("de", holder.contentView.toString());
-        Log.d("de",holder.itemId.toString());
         holder.contentView.text = item.street_name
     }
 

@@ -22,7 +22,7 @@ class StationPage : AppCompatActivity() {
             Log.d("receive", stationName)
           //  val txtView = this@StationPage.findViewById<View>(R.id.)
             val t1 = findViewById<View>(R.id.StationName) as TextView
-            t1.text = "RRRRRR"
+            t1.text = stationName
         }
 
 
