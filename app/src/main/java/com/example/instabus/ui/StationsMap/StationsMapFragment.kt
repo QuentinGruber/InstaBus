@@ -1,12 +1,15 @@
 package com.example.instabus.ui.StationsMap
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.instabus.MainActivity.Companion.Stations
 import com.example.instabus.R
+import com.example.instabus.StationPage
 import com.example.instabus.objects.Station
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -30,7 +33,7 @@ class StationsMapFragment : Fragment() {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(41.3985182, 2.1917991), 14.0f))
         googleMap.setOnMarkerClickListener { marker ->
             if (lastMarkerId == marker.id) {
-                // TODO: load station page here
+                displayStationPage(marker.title)
                 marker.hideInfoWindow()
             } else {
                 lastMarkerId = marker.id
@@ -41,7 +44,7 @@ class StationsMapFragment : Fragment() {
 
         googleMap.setOnInfoWindowClickListener { marker ->
             if (lastMarkerId == marker.id) {
-                // TODO: load station page here
+                displayStationPage(marker.title)
                 marker.hideInfoWindow()
             } else {
                 lastMarkerId = marker.id
@@ -61,5 +64,11 @@ class StationsMapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+    }
+
+    fun displayStationPage(stationName: String) {
+        val myIntent = Intent(getActivity(), StationPage::class.java)
+        myIntent.putExtra("stationName", stationName) //Optional parameters
+        getActivity()?.startActivity(myIntent)
     }
 }
