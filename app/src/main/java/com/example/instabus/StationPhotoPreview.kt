@@ -1,5 +1,7 @@
 package com.example.instabus
 
+import DB
+import StationPhoto
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -15,6 +17,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -31,11 +34,9 @@ class StationPhotoPreview : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_station_photo_preview)
 
-        // val f = File(Environment.getExternalStorageDirectory(), "temp.jpg")
 
         val takePictureintent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        // takePictureintent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this@StationPage, AUTHORITY, f));
-        //takePictureintent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         startActivityForResult(takePictureintent, REQUEST_CODE)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -80,8 +81,17 @@ class StationPhotoPreview : AppCompatActivity() {
         }
 
         Log.d("dd", Uri.parse(file.absolutePath).toString())
-        // Return the saved image uri
-        //return Uri.parse(file.absolutePath)
+
+        val t1 = findViewById<View>(R.id.editPictureTitle) as TextView
+        val dbHandler = DB(this, null)
+        val intent = intent
+        var stationName = intent.getStringExtra("stationName")
+        if (stationName == null) {
+            stationName = "";
+        }
+        val user = StationPhoto(t1.text.toString(), stationName, Uri.parse(file.absolutePath).toString())
+        dbHandler.addStationPicture(user)
+        Toast.makeText(this, user.toString() + "Added to database", Toast.LENGTH_LONG).show()
 
     }
 }

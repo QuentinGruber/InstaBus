@@ -1,25 +1,18 @@
 package com.example.instabus
 
+import DB
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.media.tv.TvContract.AUTHORITY
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.io.File
 
 
 class StationPage : AppCompatActivity() {
@@ -28,7 +21,7 @@ class StationPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_station_page)
         setSupportActionBar(findViewById(R.id.toolbar))
-
+        test();
         val intent = intent
         val stationName = intent.getStringExtra("stationName")
         if (stationName != null) {
@@ -45,7 +38,28 @@ class StationPage : AppCompatActivity() {
             }
             else {
                 val myIntent = Intent(this@StationPage, StationPhotoPreview::class.java)
+                myIntent.putExtra("stationName", stationName)
                 this@StationPage.startActivity(myIntent)
+            }
+        }
+    }
+
+    fun test () {
+        val dbHandler = DB(this, null)
+        val cursor = dbHandler.getAllStationPictures()
+        if (cursor != null) {
+            if(cursor.getCount() > 0) {
+                //do stuff
+                cursor!!.moveToFirst()
+                 Log.d("db", cursor.getString(cursor.getColumnIndex("title")))
+                 Log.d("db", cursor.getString(cursor.getColumnIndex("stationName")))
+                Log.d("db", cursor.getString(cursor.getColumnIndex("imagePath")))
+                while (cursor.moveToNext()) {
+                          Log.d("db", cursor.getString(cursor.getColumnIndex("title")))
+                          Log.d("db", cursor.getString(cursor.getColumnIndex("stationName")))
+                    Log.d("db", cursor.getString(cursor.getColumnIndex("imagePath")))
+                }
+                cursor.close()
             }
         }
     }
