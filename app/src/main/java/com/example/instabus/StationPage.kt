@@ -36,32 +36,17 @@ class StationPage : AppCompatActivity() {
             val t1 = findViewById<View>(R.id.StationName) as TextView
             t1.text = stationName
         }
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             ActivityCompat.requestPermissions(this, Array<String>(1) { Manifest.permission.CAMERA }, REQUEST_CODE);
-           // val f = File(Environment.getExternalStorageDirectory(), "temp.jpg")
-
-            val takePictureintent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-           // takePictureintent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this@StationPage, AUTHORITY, f));
-            //takePictureintent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
             {
                 Toast.makeText(this, "Unable to open camera reason : PERMISSION_DENIED", Toast.LENGTH_SHORT).show()
             }
             else {
-                startActivityForResult(takePictureintent, REQUEST_CODE)
+                val myIntent = Intent(this@StationPage, StationPhotoPreview::class.java)
+                this@StationPage.startActivity(myIntent)
             }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK ){
-            val takenImage = data?.extras?.get("data") as Bitmap
-            val imagePlace = findViewById<View>(R.id.imageView2) as ImageView;
-            imagePlace.setImageBitmap(takenImage);
-        }
-        else{
-            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
