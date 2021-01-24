@@ -1,6 +1,7 @@
 package com.example.instabus
 
 import DB
+import StationPhoto
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,12 +17,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class StationPage : AppCompatActivity() {
+    companion object {
+        var stationsPictures : List<StationPhoto> = mutableListOf()
+    }
     val REQUEST_CODE = 42;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loadStationsPictures();
         setContentView(R.layout.activity_station_page)
         setSupportActionBar(findViewById(R.id.toolbar))
-        test();
         val intent = intent
         val stationName = intent.getStringExtra("stationName")
         if (stationName != null) {
@@ -44,20 +48,23 @@ class StationPage : AppCompatActivity() {
         }
     }
 
-    fun test () {
+    fun loadStationsPictures () {
         val dbHandler = DB(this, null)
         val cursor = dbHandler.getAllStationPictures()
         if (cursor != null) {
             if(cursor.getCount() > 0) {
                 //do stuff
                 cursor!!.moveToFirst()
-                 Log.d("db", cursor.getString(cursor.getColumnIndex("title")))
-                 Log.d("db", cursor.getString(cursor.getColumnIndex("stationName")))
-                Log.d("db", cursor.getString(cursor.getColumnIndex("imagePath")))
+                stationsPictures += StationPhoto(title = cursor.getString(
+                    cursor.getColumnIndex("title"))
+                    ,imagePath = cursor.getString(cursor.getColumnIndex("imagePath"))
+                    ,stationName = cursor.getString(cursor.getColumnIndex("stationName")))
+
                 while (cursor.moveToNext()) {
-                          Log.d("db", cursor.getString(cursor.getColumnIndex("title")))
-                          Log.d("db", cursor.getString(cursor.getColumnIndex("stationName")))
-                    Log.d("db", cursor.getString(cursor.getColumnIndex("imagePath")))
+                    stationsPictures += StationPhoto(title = cursor.getString(
+                        cursor.getColumnIndex("title"))
+                        ,imagePath = cursor.getString(cursor.getColumnIndex("imagePath"))
+                        ,stationName = cursor.getString(cursor.getColumnIndex("stationName")))
                 }
                 cursor.close()
             }
