@@ -35,6 +35,10 @@ class DB(context: Context,
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
+    fun getStationPictures(stationName:String): Cursor? {
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE stationName = '$stationName'", null)
+    }
     fun getAllStationPictures(): Cursor? {
         val db = this.readableDatabase
         return db.rawQuery("SELECT * FROM $TABLE_NAME", null)

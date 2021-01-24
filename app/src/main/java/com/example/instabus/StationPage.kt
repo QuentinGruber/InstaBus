@@ -23,15 +23,19 @@ class StationPage : AppCompatActivity() {
     val REQUEST_CODE = 42;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadStationsPictures();
-        setContentView(R.layout.activity_station_page)
+
         setSupportActionBar(findViewById(R.id.toolbar))
         val intent = intent
         val stationName = intent.getStringExtra("stationName")
         if (stationName != null) {
+            loadStationsPictures(stationName)
+            setContentView(R.layout.activity_station_page)
             Log.d("receive", stationName)
             val t1 = findViewById<View>(R.id.StationName) as TextView
             t1.text = stationName
+        };
+        else {
+            setContentView(R.layout.activity_station_page)
         }
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             ActivityCompat.requestPermissions(this, Array<String>(1) { Manifest.permission.CAMERA }, REQUEST_CODE);
@@ -48,9 +52,10 @@ class StationPage : AppCompatActivity() {
         }
     }
 
-    fun loadStationsPictures () {
+    fun loadStationsPictures (stationName:String) {
         val dbHandler = DB(this, null)
-        val cursor = dbHandler.getAllStationPictures()
+        val cursor = dbHandler.getStationPictures(stationName)
+        stationsPictures = emptyList();
         if (cursor != null) {
             if(cursor.getCount() > 0) {
                 //do stuff
