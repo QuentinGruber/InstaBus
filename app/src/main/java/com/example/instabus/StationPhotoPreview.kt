@@ -41,6 +41,7 @@ class StationPhotoPreview : AppCompatActivity() {
         startActivityForResult(takePictureintent, REQUEST_CODE)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK ){
             val takenImage = data?.extras?.get("data") as Bitmap
             val imagePlace = findViewById<View>(R.id.imageView2) as ImageView;
@@ -50,7 +51,7 @@ class StationPhotoPreview : AppCompatActivity() {
             }
         }
         else{
-            super.onActivityResult(requestCode, resultCode, data)
+            finish()
         }
     }
     fun save(Image: Bitmap) {
@@ -92,7 +93,6 @@ class StationPhotoPreview : AppCompatActivity() {
         }
         val user = StationPhoto(t1.text.toString(), stationName, Uri.parse(file.absolutePath).toString())
         dbHandler.addStationPicture(user)
-        Toast.makeText(this, user.toString() + "Added to database", Toast.LENGTH_LONG).show()
-
+        finish()
     }
 }

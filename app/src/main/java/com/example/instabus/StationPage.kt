@@ -20,6 +20,12 @@ class StationPage : AppCompatActivity() {
     companion object {
         var stationsPictures : List<StationPhoto> = mutableListOf()
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        finish()
+        startActivity(intent)
+    }
     val REQUEST_CODE = 42;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +58,7 @@ class StationPage : AppCompatActivity() {
         }
     }
 
-    fun loadStationsPictures (stationName:String) {
+    fun loadStationsPictures(stationName: String) {
         val dbHandler = DB(this, null)
         val cursor = dbHandler.getStationPictures(stationName)
         stationsPictures = emptyList();
@@ -61,15 +67,11 @@ class StationPage : AppCompatActivity() {
                 //do stuff
                 cursor!!.moveToFirst()
                 stationsPictures += StationPhoto(title = cursor.getString(
-                    cursor.getColumnIndex("title"))
-                    ,imagePath = cursor.getString(cursor.getColumnIndex("imagePath"))
-                    ,stationName = cursor.getString(cursor.getColumnIndex("stationName")))
+                        cursor.getColumnIndex("title")), imagePath = cursor.getString(cursor.getColumnIndex("imagePath")), stationName = cursor.getString(cursor.getColumnIndex("stationName")))
 
                 while (cursor.moveToNext()) {
                     stationsPictures += StationPhoto(title = cursor.getString(
-                        cursor.getColumnIndex("title"))
-                        ,imagePath = cursor.getString(cursor.getColumnIndex("imagePath"))
-                        ,stationName = cursor.getString(cursor.getColumnIndex("stationName")))
+                            cursor.getColumnIndex("title")), imagePath = cursor.getString(cursor.getColumnIndex("imagePath")), stationName = cursor.getString(cursor.getColumnIndex("stationName")))
                 }
                 cursor.close()
             }
