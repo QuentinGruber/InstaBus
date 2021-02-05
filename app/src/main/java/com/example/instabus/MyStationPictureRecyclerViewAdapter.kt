@@ -15,9 +15,7 @@ import com.example.instabus.StationPage.Companion.stationsPictures
 import java.io.File
 
 
-class MyStationPictureRecyclerViewAdapter(
-
-) : RecyclerView.Adapter<MyStationPictureRecyclerViewAdapter.ViewHolder>() {
+class MyStationPictureRecyclerViewAdapter : RecyclerView.Adapter<MyStationPictureRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -38,7 +36,7 @@ class MyStationPictureRecyclerViewAdapter(
         //imagePlace.setImageBitmap(takenImage);
         val imgFile = File(item.imagePath)
         if (imgFile.exists()) {
-            val imageBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath())
+            val imageBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
             holder.stationPicture.setImageBitmap(imageBitmap)
         }
     }
@@ -51,8 +49,8 @@ class MyStationPictureRecyclerViewAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val stationPictureTitle: TextView = view.findViewById(R.id.stationPictureTitle)
-        val stationPicture: ImageView = view.findViewById(R.id.stationPicture);
-        val stationPictureButtonDelete: Button = view.findViewById(R.id.StationPictureButtonDelete);
+        val stationPicture: ImageView = view.findViewById(R.id.stationPicture)
+        val stationPictureButtonDelete: Button = view.findViewById(R.id.StationPictureButtonDelete)
         override fun toString(): String {
             return super.toString() + " '" + stationPictureTitle.text + "'"
         }

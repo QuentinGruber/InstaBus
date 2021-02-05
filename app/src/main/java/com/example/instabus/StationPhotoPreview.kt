@@ -30,7 +30,7 @@ import java.io.OutputStream
 import java.util.*
 
 class StationPhotoPreview : AppCompatActivity() {
-    private val REQUEST_CODE = 42;
+    private val REQUEST_CODE = 42
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_station_photo_preview)
@@ -44,8 +44,8 @@ class StationPhotoPreview : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK ){
             val takenImage = data?.extras?.get("data") as Bitmap
-            val imagePlace = findViewById<View>(R.id.imageView2) as ImageView;
-            imagePlace.setImageBitmap(takenImage);
+            val imagePlace = findViewById<View>(R.id.imageView2) as ImageView
+            imagePlace.setImageBitmap(takenImage)
             findViewById<Button>(R.id.saveButton).setOnClickListener {
                 save(takenImage)
             }
@@ -89,7 +89,7 @@ class StationPhotoPreview : AppCompatActivity() {
         val intent = intent
         var stationName = intent.getStringExtra("stationName")
         if (stationName == null) {
-            stationName = "";
+            stationName = ""
         }
         val user = StationPhoto(t1.text.toString(), stationName, Uri.parse(file.absolutePath).toString())
         dbHandler.addStationPicture(user)

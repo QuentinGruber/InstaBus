@@ -26,7 +26,7 @@ class StationPage : AppCompatActivity() {
         finish()
         startActivity(intent)
     }
-    val REQUEST_CODE = 42;
+    val REQUEST_CODE = 42
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,12 +39,11 @@ class StationPage : AppCompatActivity() {
             Log.d("receive", stationName)
             val t1 = findViewById<View>(R.id.StationName) as TextView
             t1.text = stationName
-        };
-        else {
+        } else {
             setContentView(R.layout.activity_station_page)
         }
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
-            ActivityCompat.requestPermissions(this, Array<String>(1) { Manifest.permission.CAMERA }, REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, Array<String>(1) { Manifest.permission.CAMERA }, REQUEST_CODE)
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
             {
@@ -61,11 +60,11 @@ class StationPage : AppCompatActivity() {
     fun loadStationsPictures(stationName: String) {
         val dbHandler = DB(this, null)
         val cursor = dbHandler.getStationPictures(stationName)
-        stationsPictures = mutableListOf<StationPhoto>();
+        stationsPictures = mutableListOf<StationPhoto>()
         if (cursor != null) {
-            if(cursor.getCount() > 0) {
+            if(cursor.count > 0) {
                 //do stuff
-                cursor!!.moveToFirst()
+                cursor.moveToFirst()
                 stationsPictures.plusAssign(
                     StationPhoto(title = cursor.getString(
                         cursor.getColumnIndex("title")), imagePath = cursor.getString(cursor.getColumnIndex("imagePath")), stationName = cursor.getString(cursor.getColumnIndex("stationName")))

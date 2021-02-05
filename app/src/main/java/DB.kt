@@ -37,7 +37,7 @@ class DB(context: Context,
     }
     fun getStationPictures(stationName:String): Cursor? {
         val db = this.readableDatabase
-        var stationNameWithoutQuote = stationName.replace("'", "''");
+        var stationNameWithoutQuote = stationName.replace("'", "''")
         return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE stationName = '$stationNameWithoutQuote'", null)
     }
 

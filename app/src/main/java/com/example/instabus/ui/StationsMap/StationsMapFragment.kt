@@ -67,8 +67,8 @@ class StationsMapFragment : Fragment() {
     }
 
     fun displayStationPage(stationName: String) {
-        val myIntent = Intent(getActivity(), StationPage::class.java)
+        val myIntent = Intent(activity, StationPage::class.java)
         myIntent.putExtra("stationName", stationName) //Optional parameters
-        getActivity()?.startActivity(myIntent)
+        activity?.startActivity(myIntent)
     }
 }
