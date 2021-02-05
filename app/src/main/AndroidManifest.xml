@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/instabus_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaBus.SplashScreen"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".StationPhotoPreview"></activity>
         <activity
             android:name=".StationPage"
