@@ -8,6 +8,7 @@
     android:layout_centerHorizontal="false"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:paddingBottom="100dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".StationListGenFragment"
     tools:listitem="@layout/fragment_station_item" />
