@@ -2,12 +2,10 @@ package com.example.instabus
 
 import DB
 import StationPhoto
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +16,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.example.instabus.objects.Station
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -54,7 +47,7 @@ class StationPhotoPreview : AppCompatActivity() {
             finish()
         }
     }
-    fun save(Image: Bitmap) {
+    private fun save(Image: Bitmap) {
         // Get the context wrapper instance
         val wrapper = ContextWrapper(applicationContext)
 

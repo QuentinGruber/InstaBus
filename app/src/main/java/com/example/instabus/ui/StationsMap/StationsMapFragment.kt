@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.instabus.MainActivity.Companion.Stations
 import com.example.instabus.R
@@ -68,7 +67,7 @@ class StationsMapFragment : Fragment() {
 
     fun displayStationPage(stationName: String) {
         val myIntent = Intent(activity, StationPage::class.java)
-        myIntent.putExtra("stationName", stationName) //Optional parameters
+        myIntent.putExtra("stationName", stationName)
         activity?.startActivity(myIntent)
     }
 }

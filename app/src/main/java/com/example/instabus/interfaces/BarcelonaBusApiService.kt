@@ -8,8 +8,6 @@ data class BarcelonaBusResponseApi(
     val data: BarcelonaBusApiResponseData
 )
 
-//TODO: data class / interface mess
-
 data class  BarcelonaBusApiResponseData (
     val nearstations: List<Station>,
     val transport: String

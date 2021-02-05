@@ -36,7 +36,6 @@ class StationPage : AppCompatActivity() {
         if (stationName != null) {
             loadStationsPictures(stationName)
             setContentView(R.layout.activity_station_page)
-            Log.d("receive", stationName)
             val t1 = findViewById<View>(R.id.StationName) as TextView
             t1.text = stationName
         } else {
@@ -60,10 +59,9 @@ class StationPage : AppCompatActivity() {
     fun loadStationsPictures(stationName: String) {
         val dbHandler = DB(this, null)
         val cursor = dbHandler.getStationPictures(stationName)
-        stationsPictures = mutableListOf<StationPhoto>()
+        stationsPictures = mutableListOf()
         if (cursor != null) {
             if(cursor.count > 0) {
-                //do stuff
                 cursor.moveToFirst()
                 stationsPictures.plusAssign(
                     StationPhoto(title = cursor.getString(

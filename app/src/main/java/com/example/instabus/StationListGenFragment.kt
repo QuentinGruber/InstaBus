@@ -8,12 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.instabus.MainActivity
 import com.example.instabus.MainActivity.Companion.Stations
 
-/**
- * A fragment representing a list of Items.
- */
+
 class StationListGenFragment : Fragment() {
 
     private var columnCount = 1
@@ -44,11 +41,7 @@ class StationListGenFragment : Fragment() {
     }
 
     companion object {
-
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
                 StationListGenFragment().apply {

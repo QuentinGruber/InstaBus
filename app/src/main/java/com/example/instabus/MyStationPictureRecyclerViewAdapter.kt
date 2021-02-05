@@ -1,9 +1,7 @@
 package com.example.instabus
 
 import DB
-import android.content.Context
 import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +31,6 @@ class MyStationPictureRecyclerViewAdapter : RecyclerView.Adapter<MyStationPictur
                 removeItem(position)
             }
         }
-        //imagePlace.setImageBitmap(takenImage);
         val imgFile = File(item.imagePath)
         if (imgFile.exists()) {
             val imageBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
