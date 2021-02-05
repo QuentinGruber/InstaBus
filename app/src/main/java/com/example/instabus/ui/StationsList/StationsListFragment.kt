@@ -15,7 +15,6 @@ class StationsListFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_stations_list, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_stations_list, container, false)
     }
 }

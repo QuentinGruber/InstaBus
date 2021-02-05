@@ -4,7 +4,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import java.util.jar.Attributes
 
 class DB(context: Context,
          factory: SQLiteDatabase.CursorFactory?) :
@@ -23,7 +22,7 @@ class DB(context: Context,
         db.execSQL(CREATE_PRODUCTS_TABLE)
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
     fun addStationPicture(stationPicture: StationPhoto) {
@@ -37,29 +36,25 @@ class DB(context: Context,
     }
     fun getStationPictures(stationName:String): Cursor? {
         val db = this.readableDatabase
-        var stationNameWithoutQuote = stationName.replace("'", "''")
+        val stationNameWithoutQuote = stationName.replace("'", "''")
         return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE stationName = '$stationNameWithoutQuote'", null)
     }
 
     fun deleteStationPicture(imagePath:String): Boolean {
         val db = this.writableDatabase
-        try {
-            db.delete("$TABLE_NAME","imagePath = '$imagePath'",null)
-            return true
+        return try {
+            db.delete(TABLE_NAME,"imagePath = '$imagePath'",null)
+            true
         }
         catch (e: Throwable){
-            return false
+            false
         }
     }
 
-    fun getAllStationPictures(): Cursor? {
-        val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
-    }
     companion object {
-        private val DATABASE_VERSION = 1
-        private val DATABASE_NAME = "instabus.db"
-        val TABLE_NAME = "stationPicture"
-        val COLUMN_ID = "_id"
+        private const val DATABASE_VERSION = 1
+        private const val DATABASE_NAME = "instabus.db"
+        const val TABLE_NAME = "stationPicture"
+        const val COLUMN_ID = "_id"
     }
 }

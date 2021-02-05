@@ -37,7 +37,7 @@ class MyStationPictureRecyclerViewAdapter : RecyclerView.Adapter<MyStationPictur
             holder.stationPicture.setImageBitmap(imageBitmap)
         }
     }
-    fun removeItem(position: Int) {
+    private fun removeItem(position: Int) {
         stationsPictures.removeAt(position)
         notifyDataSetChanged()
     }

@@ -42,12 +42,5 @@ class StationListGenFragment : Fragment() {
 
     companion object {
         const val ARG_COLUMN_COUNT = "column-count"
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-                StationListGenFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_COLUMN_COUNT, columnCount)
-                    }
-                }
     }
 }

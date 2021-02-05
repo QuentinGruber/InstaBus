@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 
 class StationsMapFragment : Fragment() {
-    var lastMarkerId = ""
+    private var lastMarkerId = ""
     private val callback = OnMapReadyCallback { googleMap ->
         Stations.forEach { station: Station ->
             val stationPostion = LatLng(station.lat, station.lon)
@@ -65,7 +65,7 @@ class StationsMapFragment : Fragment() {
         mapFragment?.getMapAsync(callback)
     }
 
-    fun displayStationPage(stationName: String) {
+    private fun displayStationPage(stationName: String) {
         val myIntent = Intent(activity, StationPage::class.java)
         myIntent.putExtra("stationName", stationName)
         activity?.startActivity(myIntent)

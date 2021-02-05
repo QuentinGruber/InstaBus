@@ -6,7 +6,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -26,7 +25,7 @@ class StationPage : AppCompatActivity() {
         finish()
         startActivity(intent)
     }
-    val REQUEST_CODE = 42
+    private val REQUEST_CODE = 42
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,7 +41,7 @@ class StationPage : AppCompatActivity() {
             setContentView(R.layout.activity_station_page)
         }
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
-            ActivityCompat.requestPermissions(this, Array<String>(1) { Manifest.permission.CAMERA }, REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, Array(1) { Manifest.permission.CAMERA }, REQUEST_CODE)
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
             {
@@ -56,7 +55,7 @@ class StationPage : AppCompatActivity() {
         }
     }
 
-    fun loadStationsPictures(stationName: String) {
+    private fun loadStationsPictures(stationName: String) {
         val dbHandler = DB(this, null)
         val cursor = dbHandler.getStationPictures(stationName)
         stationsPictures = mutableListOf()
