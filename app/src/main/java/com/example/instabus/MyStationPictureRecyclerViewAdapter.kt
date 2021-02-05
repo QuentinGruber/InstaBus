@@ -1,10 +1,13 @@
 package com.example.instabus
 
+import DB
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +26,15 @@ class MyStationPictureRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("on en est la", stationsPictures.toString())
         val item = stationsPictures[position]
         holder.stationPictureTitle.text = item.title
+        holder.stationPictureButtonDelete.setOnClickListener { v ->
+            val dbHandler = DB(v.context , null)
+
+            if(item.imagePath?.let { dbHandler.deleteStationPicture(it) } == true){
+                removeItem(position)
+            }
+        }
         //imagePlace.setImageBitmap(takenImage);
         val imgFile = File(item.imagePath)
         if (imgFile.exists()) {
@@ -33,13 +42,17 @@ class MyStationPictureRecyclerViewAdapter(
             holder.stationPicture.setImageBitmap(imageBitmap)
         }
     }
+    fun removeItem(position: Int) {
+        stationsPictures.removeAt(position)
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = stationsPictures.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val stationPictureTitle: TextView = view.findViewById(R.id.stationPictureTitle)
-        val stationPicture: ImageView = view.findViewById<View>(R.id.stationPicture) as ImageView;
-
+        val stationPicture: ImageView = view.findViewById(R.id.stationPicture);
+        val stationPictureButtonDelete: Button = view.findViewById(R.id.StationPictureButtonDelete);
         override fun toString(): String {
             return super.toString() + " '" + stationPictureTitle.text + "'"
         }

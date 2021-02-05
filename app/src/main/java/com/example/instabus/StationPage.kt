@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class StationPage : AppCompatActivity() {
     companion object {
-        var stationsPictures : List<StationPhoto> = mutableListOf()
+        var stationsPictures : MutableList <StationPhoto> = mutableListOf()
     }
 
     override fun onRestart() {
@@ -61,17 +61,21 @@ class StationPage : AppCompatActivity() {
     fun loadStationsPictures(stationName: String) {
         val dbHandler = DB(this, null)
         val cursor = dbHandler.getStationPictures(stationName)
-        stationsPictures = emptyList();
+        stationsPictures = mutableListOf<StationPhoto>();
         if (cursor != null) {
             if(cursor.getCount() > 0) {
                 //do stuff
                 cursor!!.moveToFirst()
-                stationsPictures += StationPhoto(title = cursor.getString(
+                stationsPictures.plusAssign(
+                    StationPhoto(title = cursor.getString(
                         cursor.getColumnIndex("title")), imagePath = cursor.getString(cursor.getColumnIndex("imagePath")), stationName = cursor.getString(cursor.getColumnIndex("stationName")))
+                )
 
                 while (cursor.moveToNext()) {
-                    stationsPictures += StationPhoto(title = cursor.getString(
+                    stationsPictures.plusAssign(
+                        StationPhoto(title = cursor.getString(
                             cursor.getColumnIndex("title")), imagePath = cursor.getString(cursor.getColumnIndex("imagePath")), stationName = cursor.getString(cursor.getColumnIndex("stationName")))
+                    )
                 }
                 cursor.close()
             }

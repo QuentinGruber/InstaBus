@@ -40,6 +40,18 @@ class DB(context: Context,
         var stationNameWithoutQuote = stationName.replace("'", "''");
         return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE stationName = '$stationNameWithoutQuote'", null)
     }
+
+    fun deleteStationPicture(imagePath:String): Boolean {
+        val db = this.writableDatabase
+        try {
+            db.delete("$TABLE_NAME","imagePath = '$imagePath'",null)
+            return true
+        }
+        catch (e: Throwable){
+            return false
+        }
+    }
+
     fun getAllStationPictures(): Cursor? {
         val db = this.readableDatabase
         return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
