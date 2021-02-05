@@ -9,10 +9,12 @@
         android:id="@+id/Card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginVertical="20px"
+        android:backgroundTint="@color/teal_500"
+        android:backgroundTintMode="add"
         android:clickable="true"
         android:forceDarkAllowed="false"
         android:onClick="DisplayStationPage"
-        android:outlineAmbientShadowColor="#FF1212"
         app:cardBackgroundColor="#00E61414"
         app:cardCornerRadius="2dp">
 

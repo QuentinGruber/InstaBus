@@ -2,9 +2,9 @@
     <string name="app_name">InstaBus</string>
     <string name="list_title">List</string>
     <string name="map_title">Map</string>
-    <string name="list_desc">"Liste des stations barcelona"</string>
-    <string name="map_desc">Map des stations barcelona</string>
-    <string name="title_activity_station_page">StationPage</string>
+    <string name="list_desc">"List of Barcelona buses stations"</string>
+    <string name="map_desc">Map of Barcelona buses stations</string>
+    <string name="title_activity_station_page">Station Page</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -17,5 +17,6 @@
     <string name="StationPhotoNamePlaceholder">Title</string>
     <string name="SaveStationPhoto">Save picture</string>
     <string name="stationPlaceHolder">Station</string>
+    <string name="setPictureTitle">Choose a cool title for your picture !</string>
     <string name="delete">Delete</string>
 </resources>
