@@ -18,7 +18,6 @@ class DB(context: Context,
                 "imagePath TEXT)"
                 )
 
-        Log.d("ici",CREATE_PRODUCTS_TABLE)
         db.execSQL(CREATE_PRODUCTS_TABLE)
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

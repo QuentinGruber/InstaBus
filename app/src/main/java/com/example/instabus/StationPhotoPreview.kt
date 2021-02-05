@@ -75,8 +75,6 @@ class StationPhotoPreview : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        Log.d("dd", Uri.parse(file.absolutePath).toString())
-
         val t1 = findViewById<View>(R.id.editPictureTitle) as TextView
         val dbHandler = DB(this, null)
         val intent = intent

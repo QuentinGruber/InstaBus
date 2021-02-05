@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                     response: Response<BarcelonaBusResponseApi>
             ) {
                 val allStations = response.body()
-                Log.d("Stations", allStations.toString())
                 if (allStations != null) {
                     Stations = allStations.data.nearstations
                     LoadApp()
