@@ -10,13 +10,13 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="451dp"
-            android:layout_height="565dp"
+            android:layout_width="380dp"
+            android:layout_height="512dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/instabus_logo"
+            app:srcCompat="@mipmap/instabus_logo_foreground"
             tools:src="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

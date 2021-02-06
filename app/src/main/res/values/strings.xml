@@ -7,7 +7,7 @@
     <string name="title_activity_station_page">Station Page</string>
     <!-- Strings used for fragments for navigation -->
 
-    <string name="StationPhotoNamePlaceholder">Title</string>
+    <string name="StationPhotoNamePlaceholder">MyTitle</string>
     <string name="SaveStationPhoto">Save picture</string>
     <string name="stationPlaceHolder">Station</string>
     <string name="setPictureTitle">Choose a cool title for your picture !</string>
