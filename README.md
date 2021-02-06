@@ -2,4 +2,4 @@
 
 Android SDK : Android 11.0 (R) API Level 30
 
-Tested on Pixel 3 API 30
+Tested on Pixel 3 Release Name : 'R' API Level 30
